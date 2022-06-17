@@ -35,5 +35,22 @@ def resize_image(percent: float):
     sys.exit("Finished!")
 
 
+def crop_image():
+    file = assets.cat_image
+    image = cv.imread(file)
+
+    # Make sure you crop within the image dimensions
+    print('Dimensions:', image.shape)
+
+    # Since images are just arrays of numbers, we can crop them by selecting ranges
+    cropped_image = image[150:450, 200:450]  # [Start-Y:End-Y, Start-X:End-X]
+
+    # Show the cropped part
+    cv.imshow('Cropped Image', cropped_image)
+    cv.waitKey(3000)
+    cv.destroyAllWindows()
+    sys.exit("Finished!")
+
+
 if __name__ == '__main__':
     resize_image(percent=0.2)
