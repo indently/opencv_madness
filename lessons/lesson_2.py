@@ -32,6 +32,7 @@ def play_video(file: str, webcam: bool = False):
 
         while video.isOpened():
             success, frame = video.read()
+            # If there is a frame to show
             if success:
                 cv.imshow('Frame', frame)
                 output.write(frame)
