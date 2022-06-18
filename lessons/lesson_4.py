@@ -23,7 +23,7 @@ def annotate_circle():
     image = cv.imread(file)
 
     image_copy = image.copy()
-    circle_center = (300, 300)  # From: (X, Y) To: (X, Y)
+    circle_center = (300, 300)
     cv.circle(image_copy, circle_center, radius=200, color=(0, 255, 255), thickness=6)
     # -1 thickness fills the circle
 
@@ -39,9 +39,9 @@ def annotate_square():
     image = cv.imread(file)
 
     image_copy = image.copy()
-    A, B = (200, 200), (450, 450)
+    left, top, right, bottom = 200, 200, 450, 450  # left top right bottom
 
-    cv.rectangle(image_copy, A, B, (0, 255, 0), thickness=6, lineType=cv.LINE_8)
+    cv.rectangle(image_copy, (left, top), (right, bottom), (0, 255, 0), thickness=6, lineType=cv.LINE_8)
 
     cv.imshow('Square', image_copy)
 
@@ -56,7 +56,7 @@ def annotate_text():
 
     image_copy = image.copy()
     text = 'This is cat'
-    position = (450, 300)  # X, Y starts at bottom left
+    position = (450, 300)  # X, Y starts at bottom
     cv.putText(image_copy, text, position, fontFace=cv.FONT_HERSHEY_COMPLEX,
                fontScale=1.7, color=(0, 255, 0), thickness=2)
 
@@ -75,12 +75,13 @@ def annotate_text_square():
     image_copy = image.copy()
 
     # Square
-    A, B = (200, 200), (450, 450)
-    cv.rectangle(image_copy, A, B, (0, 255, 0), thickness=6, lineType=cv.LINE_8)
+    left, top, right, bottom = 200, 200, 450, 450  # left top right bottom
+    cv.rectangle(image_copy, (left, top), (right, bottom), (0, 255, 0), thickness=6,
+                 lineType=cv.LINE_8)
 
     # Text
     text = 'This is cat'
-    position = (A[0], B[1] + 50)  # X, Y starts at bottom left
+    position = (left, bottom + 50)
     cv.putText(image_copy, text, position, fontFace=cv.FONT_HERSHEY_COMPLEX,
                fontScale=1.4, color=(0, 255, 0), thickness=2)
 
