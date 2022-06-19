@@ -41,6 +41,7 @@ def annotate_square():
     image_copy = image.copy()
     left, top, right, bottom = 200, 200, 450, 450  # left top right bottom
 
+    #  Line Type: https://www.oreilly.com/library/view/mastering-opencv-4/9781789344912/5c4150d2-b550-40be-8b18-f2e71e20d9be.xhtml
     cv.rectangle(image_copy, (left, top), (right, bottom), (0, 255, 0), thickness=6, lineType=cv.LINE_8)
 
     cv.imshow('Square', image_copy)
