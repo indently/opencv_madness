@@ -7,3 +7,4 @@ def show_image(window_name, image, time=0):
     cv.setWindowProperty(window_name, cv.WND_PROP_TOPMOST, 1)
     cv.moveWindow(window_name, 100, 100)
     cv.waitKey(time)
+    cv.destroyAllWindows()

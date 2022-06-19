@@ -3,30 +3,37 @@ from assets import assets
 from helpers import image_helpers as och
 
 
-def apply_threshold(thresholds: list[int], max_value: int, threshold_type):
-    file = assets.numbers
-    image = cv.imread(file, cv.IMREAD_GRAYSCALE)
+def apply_threshold(thresholds: range, max_value: int, threshold_type):
+    file = assets.cat_image
+    image = cv.imread(file)
 
     for threshold in thresholds:
+        image_copy = image.copy()
+
         # Show numbers that meet the requirements for the min threshold amount
-        thresh, output = cv.threshold(image, threshold, max_value, threshold_type)
+        thresh, output = cv.threshold(image_copy, threshold, max_value, threshold_type)
+
+        # Current Threshold display
+        position = (100, 100)  # X, Y starts at bottom
+        cv.putText(output, f'T: {threshold}', position, fontFace=cv.FONT_HERSHEY_COMPLEX,
+                   fontScale=2, color=(0, 100, 255), thickness=3)
 
         # Original image to compare
-        # och.show_image('Original', image, time=1000)
+        # och.show_image('Original', image, time=10)
 
         # Output image with specified Threshold
-        och.show_image(f'Threshold: {threshold}', output, time=1000)
+        och.show_image(f'Threshold: {threshold}', output, time=10)
 
 
 if __name__ == '__main__':
     # A range of thresholds for the greyscale value
-    thresh_range = [0, 20, 100, 200, 240]
+    thresh_range = range(0, 256)
 
     # The max value for the intensity of the greyscale value
     max_thresh = 255
 
     # 1
-    # Basic threshold
+    # Basic thresholda
 
     # apply_threshold(thresholds=thresh_range,
     #                 max_value=max_thresh,
@@ -44,9 +51,9 @@ if __name__ == '__main__':
     # Cuts everything below a certain limit
     # The threshold acts as a max limit, max_value is ignored
 
-    # apply_threshold(thresholds=thresh_range,
-    #                 max_value=max_thresh,
-    #                 threshold_type=cv.THRESH_TRUNC)
+    apply_threshold(thresholds=thresh_range,
+                    max_value=max_thresh,
+                    threshold_type=cv.THRESH_TRUNC)
 
     # 4
     # Thresh tozero
@@ -67,7 +74,3 @@ if __name__ == '__main__':
     # apply_threshold(thresholds=thresh_range,
     #                 max_value=max_thresh,
     #                 threshold_type=cv.THRESH_TOZERO_INV)
-
-
-
-
